@@ -14,6 +14,7 @@ class SignIn extends React.Component {
     password: PropTypes.string,
     resetError: PropTypes.func,
     signInUserRequest: PropTypes.func,
+    loading: PropTypes.bool,
     navigation: PropTypes.shape({
       navigate: PropTypes.func.isRequired
     }).isRequired
@@ -54,7 +55,7 @@ class SignIn extends React.Component {
 
   render() {
     const { email, password } = this.state
-    const { errorMessage, userLoggedIn } = this.props
+    const { errorMessage, loading, userLoggedIn } = this.props
 
     if (userLoggedIn) {
       this._signInAsync()
@@ -87,6 +88,8 @@ class SignIn extends React.Component {
             <Button
               onPress={() => this.handleOnSubmit()}
               buttonStyle={GlobalStyles.defaultButton}
+              loading={loading}
+              disable={loading}
               title="Sign In"
             />
           </View>
@@ -100,10 +103,11 @@ class SignIn extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  const { errorMessage, userData, userLoggedIn} = state.user
+  const { errorMessage, loading, userData, userLoggedIn} = state.user
 
   return{
     errorMessage,
+    loading,
     userData,
     userLoggedIn,
   }

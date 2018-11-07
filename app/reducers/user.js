@@ -33,7 +33,7 @@ export const createUserError = (state, { errorMessage }) => state.merge({
   loading: false
 })
 
-export const resetError = (state) => state.merge({ errorMessage: null })
+export const resetError = (state) => state.merge({ errorMessage: null, loading: false })
 
 export const signInUserRequest = (state) => state.merge({ loading: true, errorMessage: null })
 export const signInUserSuccess = (state, { userData }) =>
