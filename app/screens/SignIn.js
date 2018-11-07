@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux'
 import UserActions from '../reducers/user'
 import { NavigationActions } from 'react-navigation'
-import { Text, View, TextInput, Button, AsyncStorage } from 'react-native';
+import { Platform, Text, View, TextInput, AsyncStorage } from 'react-native';
+import { Input, Button } from 'react-native-elements'
+import GlobalStyles from '../styles/GlobalStyles.style'
 
 class SignIn extends React.Component {
   constructor(props) {
@@ -43,36 +45,40 @@ class SignIn extends React.Component {
     }
 
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
-        <View style={{alignItems: 'center'}}>
-          <Text>Boilerplate Sign In</Text>
-          <Text>{errorMessage}</Text>
-        </View>
-        <View style={{margin: 15}}>
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            placeholder='Email'
-            onChangeText={(email) => this.handleChangeText('email', email)}
-            value={email}
-          />
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            textContentType='password'
-            secureTextEntry={true}
-            placeholder='Password'
-            value={password}
-            onChangeText={(password) => this.handleChangeText('password', password)}
-          />
-        </View>
-        <View>
-          <Button
-            onPress={() => this.handleOnSubmit()}
-            title="Sign In"
-            color="#841584"
-          />
-        </View>
-        <View style={{alignItems: 'center'}}>
-          <Text onPress={() => this.props.navigation.navigate('SignUp')}>New here? Sign up now!</Text>
+      <View style={GlobalStyles.defaultView}>
+        <View style={{justifyContent: 'center'}}>
+          <View style={{alignItems: 'center', marginBottom: 3}}>
+            <Text style={Platform.OS === 'ios' ? GlobalStyles.titleFontIOS : GlobalStyles.titleFontAndroid}>Sign In</Text>
+            <Text style={Platform.OS === 'ios' ? GlobalStyles.errorFontIOS : GlobalStyles.errorFontAndroid}>{errorMessage}</Text>
+          </View>
+          <View style={{alignItems: 'center'}}>
+            <Input
+              placeholder='Email'
+              inputContainerStyle={GlobalStyles.defaultInput}
+              onChangeText={(email) => this.handleChangeText('email', email)}
+              value={email}
+            />
+            <Input
+              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+              textContentType='password'
+              secureTextEntry={true}
+              inputContainerStyle={GlobalStyles.defaultInput}
+              placeholder='Password'
+              value={password}
+              onChangeText={(password) => this.handleChangeText('password', password)}
+            />
+          </View>
+          <View style={{marginBottom: 5}}>
+            <Button
+              onPress={() => this.handleOnSubmit()}
+              buttonStyle={GlobalStyles.defaultButton}
+              title="Sign In"
+              color="#841584"
+            />
+          </View>
+          <View style={{alignItems: 'center'}}>
+            <Text style={Platform.OS === 'ios' ? GlobalStyles.bodyFontIOS : GlobalStyles.bodyFontAndroid} onPress={() => this.props.navigation.navigate('SignUp')}>New here? Sign up now!</Text>
+          </View>
         </View>
       </View>
     )
