@@ -2,7 +2,7 @@ import { createActions, createReducer } from 'reduxsauce'
 import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
-  createUserRequest: ['email', 'nickname', 'password', 'passwordConfirmation'],
+  createUserRequest: ['email', 'username', 'password', 'passwordConfirmation'],
   createUserSuccess: ['userData'],
   createUserError: ['errorMessage'],
   signInUserRequest: ['email', 'password'],

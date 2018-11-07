@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import UserActions from '../reducers/user'
-import { Text, View, TextInput, Button, AsyncStorage } from 'react-native';
+import { Platform, Text, View, TextInput, AsyncStorage } from 'react-native';
+import { Input, Button } from 'react-native-elements'
+import GlobalStyles from '../styles/GlobalStyles.style'
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -9,7 +11,7 @@ class SignUp extends React.Component {
 
     this.state ={
       email: '',
-      nickname: '',
+      username: '',
       password: '',
       passwordConfirmation: ''
     }
@@ -22,9 +24,9 @@ class SignUp extends React.Component {
   }
 
   handleOnSubmit = () => {
-    const { email, nickname, password, passwordConfirmation } = this.state
+    const { email, username, password, passwordConfirmation } = this.state
 
-    this.props.createUserRequest(email, nickname, password, passwordConfirmation)
+    this.props.createUserRequest(email, username, password, passwordConfirmation)
   }
 
   _signInAsync = async () => {
@@ -36,7 +38,7 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const { email, nickname, password, passwordConfirmation } = this.state
+    const { email, username, password, passwordConfirmation } = this.state
     const { errorMessage, userLoggedIn } = this.props
 
     if (userLoggedIn) {
@@ -44,34 +46,34 @@ class SignUp extends React.Component {
     }
 
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
+      <View style={GlobalStyles.defaultView}>
         <View style={{alignItems: 'center'}}>
-          <Text>Boilerplate Sign Up</Text>
-          <Text>{errorMessage}</Text>
+          <Text style={Platform.OS === 'ios' ? GlobalStyles.titleFontIOS : GlobalStyles.titleFontAndroid}>Sign Up</Text>
+          <Text style={Platform.OS === 'ios' ? GlobalStyles.errorFontIOS : GlobalStyles.errorFontAndroid}>{errorMessage}</Text>
         </View>
-        <View style={{margin: 15}}>
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+        <View style={{alignItems: 'center'}}>
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
             placeholder='Email'
             onChangeText={(email) => this.handleChangeText('email', email)}
             value={email}
           />
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-            placeholder='Nickname'
-            onChangeText={(nickname) => this.handleChangeText('nickname', nickname)}
-            value={nickname}
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
+            placeholder='Username'
+            onChangeText={(username) => this.handleChangeText('username', username)}
+            value={username}
           />
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
             textContentType='password'
             secureTextEntry={true}
             placeholder='Password'
             value={password}
             onChangeText={(password) => this.handleChangeText('password', password)}
           />
-          <TextInput
-            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
             textContentType='password'
             secureTextEntry={true}
             placeholder='Password Confirmation'
@@ -79,15 +81,15 @@ class SignUp extends React.Component {
             onChangeText={(passwordConfirmation) => this.handleChangeText('passwordConfirmation', passwordConfirmation)}
           />
         </View>
-        <View>
+        <View style={{marginBottom: 5}}>
           <Button
             onPress={() => this.handleOnSubmit()}
+            buttonStyle={GlobalStyles.defaultButton}
             title="Sign Up"
-            color="#841584"
           />
         </View>
         <View style={{alignItems: 'center'}}>
-          <Text onPress={() => this.props.navigation.navigate('SignIn')}>Already have an account? Sign In!</Text>
+          <Text style={Platform.OS === 'ios' ? GlobalStyles.bodyFontIOS : GlobalStyles.bodyFontAndroid} onPress={() => this.props.navigation.navigate('SignIn')}>Already have an account? Sign In!</Text>
         </View>
       </View>
     )
@@ -105,7 +107,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createUserRequest: (email, nickname, password, passwordConfirmation) => dispatch(UserActions.createUserRequest(email, nickname, password, passwordConfirmation))
+  createUserRequest: (email, username, password, passwordConfirmation) => dispatch(UserActions.createUserRequest(email, username, password, passwordConfirmation))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

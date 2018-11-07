@@ -2,13 +2,13 @@ import { call, put } from 'redux-saga/effects'
 import Actions from '../reducers/user'
 import { NavigationActions } from 'react-navigation'
 
-export function* createUserRequest (api, { email, nickname, password, passwordConfirmation }) {
-  const response = yield call(api.createUser, email, nickname, password, passwordConfirmation)
+export function* createUserRequest (api, { email, username, password, passwordConfirmation }) {
+  const response = yield call(api.createUser, email, username, password, passwordConfirmation)
 
   if (response.ok) {
     const { data: { data: user } } = response
     const { headers: { 'access-token': accessToken, client } } = response
-    const userData = { nickname: user.nickname, uid: user.uid, email: user.email, accessToken: accessToken, client: client }
+    const userData = { username: user.username, uid: user.uid, email: user.email, accessToken: accessToken, client: client }
 
     yield put(Actions.createUserSuccess(userData))
   } else {
@@ -24,7 +24,7 @@ export function* signInUserRequest (api, { email, password }) {
   if (response.ok) {
     const { data: { data: user } } = response
     const { headers: { 'access-token': accessToken, client } } = response
-    const userData = { nickname: user.nickname, uid: user.uid, email: user.email, accessToken: accessToken, client: client }
+    const userData = { username: user.username, uid: user.uid, email: user.email, accessToken: accessToken, client: client }
 
     yield put (Actions.signInUserSuccess(userData))
   } else {

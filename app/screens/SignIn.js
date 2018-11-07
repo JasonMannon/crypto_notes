@@ -59,7 +59,6 @@ class SignIn extends React.Component {
               value={email}
             />
             <Input
-              style={{height: 40, borderColor: 'gray', borderWidth: 1}}
               textContentType='password'
               secureTextEntry={true}
               inputContainerStyle={GlobalStyles.defaultInput}
@@ -73,7 +72,6 @@ class SignIn extends React.Component {
               onPress={() => this.handleOnSubmit()}
               buttonStyle={GlobalStyles.defaultButton}
               title="Sign In"
-              color="#841584"
             />
           </View>
           <View style={{alignItems: 'center'}}>

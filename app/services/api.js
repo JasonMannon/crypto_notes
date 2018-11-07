@@ -51,8 +51,8 @@ const create = (dispatch) => {
 
   const signInUser = (email, password) => api.post('/auth/sign_in', { email, password })
 
-  const createUser = (email, nickname, password, passwordConfirmation) =>
-    api.post('/auth', { email, nickname, password, password_confirmation: passwordConfirmation })
+  const createUser = (email, username, password, passwordConfirmation) =>
+    api.post('/auth', { email, username, password, password_confirmation: passwordConfirmation })
 
   const signOutUser = () => api.delete('/auth/sign_out')
 

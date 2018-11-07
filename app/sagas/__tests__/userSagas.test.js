@@ -13,23 +13,23 @@ const email = 'email@test.com'
 const password = 'password'
 const passwordConfirmation = 'password'
 const wrongPassword = 'wrong password'
-const nickname = 'test'
+const username = 'test'
 const accessToken = 'authToken'
 const client = 'client'
 const signInUserRequestAction = Actions.signInUserRequest(email, password)
-const createUserRequestAction = Actions.createUserRequest(email, nickname, password, passwordConfirmation)
-const createUserFailureAction = Actions.createUserRequest(email, nickname, password, wrongPassword)
+const createUserRequestAction = Actions.createUserRequest(email, username, password, passwordConfirmation)
+const createUserFailureAction = Actions.createUserRequest(email, username, password, wrongPassword)
 const signOutUserRequestAction = Actions.signOutUserRequest()
 
 describe('userSaga', () => {
-  
+
   describe('signInUser', () => {
     describe('signInUserRequest', () => {
       describe('successful request', () => {
         const userData = { uid: 'uid',
                            email: 'email',
                            accessToken: 'authToken',
-                           nickname: 'test',
+                           username: 'test',
                            client: 'client' }
         const accessToken = 'authToken'
         const client = 'client'
@@ -39,7 +39,7 @@ describe('userSaga', () => {
           data: {
             data: {
               email: 'email',
-              nickname: 'test',
+              username: 'test',
               uid: 'uid',
             }
           }
@@ -89,7 +89,7 @@ describe('userSaga', () => {
         const userData = { uid: 'uid',
                            email: 'email',
                            accessToken: 'authToken',
-                           nickname: 'test',
+                           username: 'test',
                            client: 'client' }
         const accessToken = 'authToken'
         const client = 'client'
@@ -99,7 +99,7 @@ describe('userSaga', () => {
           data: {
             data: {
               email: 'email',
-              nickname: 'test',
+              username: 'test',
               uid: 'uid',
             }
           }
@@ -107,7 +107,7 @@ describe('userSaga', () => {
         const it = sagaHelper(createUserRequest(api, createUserRequestAction))
 
         it('should create user via api', result => {
-          expect(result).toEqual(call(api.createUser, email, nickname, password, passwordConfirmation))
+          expect(result).toEqual(call(api.createUser, email, username, password, passwordConfirmation))
           return successfulCreateUserResponse
         })
 
@@ -131,7 +131,7 @@ describe('userSaga', () => {
         const it = sagaHelper(createUserRequest(api, createUserFailureAction))
 
         it('should create user via api', result => {
-          expect(result).toEqual(call(api.createUser, email, nickname, password, wrongPassword))
+          expect(result).toEqual(call(api.createUser, email, username, password, wrongPassword))
           return unsuccessfulCreateUserResponse
         })
 
