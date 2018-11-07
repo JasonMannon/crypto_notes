@@ -1,12 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types';
 import UserActions from '../reducers/user'
 import { NavigationActions } from 'react-navigation'
 import { Platform, Text, View, TextInput, AsyncStorage } from 'react-native';
 import { Input, Button } from 'react-native-elements'
 import GlobalStyles from '../styles/GlobalStyles.style'
+import * as Animatable from 'react-native-animatable';
 
 class SignIn extends React.Component {
+  static propTypes = {
+    email: PropTypes.string,
+    password: PropTypes.string,
+    resetError: PropTypes.func,
+    signInUserRequest: PropTypes.func,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired
+    }).isRequired
+  }
+
   constructor(props) {
     super(props)
 
@@ -14,6 +26,10 @@ class SignIn extends React.Component {
       email: '',
       password: ''
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetError()
   }
 
   handleChangeText = (key, value) => {
@@ -45,7 +61,7 @@ class SignIn extends React.Component {
     }
 
     return (
-      <View style={GlobalStyles.defaultView}>
+      <Animatable.View ref={ref => this.viewRef = ref} animation='fadeIn' style={GlobalStyles.defaultView}>
         <View style={{justifyContent: 'center'}}>
           <View style={{alignItems: 'center', marginBottom: 3}}>
             <Text style={Platform.OS === 'ios' ? GlobalStyles.titleFontIOS : GlobalStyles.titleFontAndroid}>Sign In</Text>
@@ -78,7 +94,7 @@ class SignIn extends React.Component {
             <Text style={Platform.OS === 'ios' ? GlobalStyles.bodyFontIOS : GlobalStyles.bodyFontAndroid} onPress={() => this.props.navigation.navigate('SignUp')}>New here? Sign up now!</Text>
           </View>
         </View>
-      </View>
+      </Animatable.View>
     )
   }
 }
@@ -94,7 +110,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  signInUserRequest: (email, password) => dispatch(UserActions.signInUserRequest(email, password))
+  signInUserRequest: (email, password) => dispatch(UserActions.signInUserRequest(email, password)),
+  resetError: () => dispatch(UserActions.resetError())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

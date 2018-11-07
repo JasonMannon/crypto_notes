@@ -5,6 +5,7 @@ const { Types, Creators } = createActions({
   createUserRequest: ['email', 'username', 'password', 'passwordConfirmation'],
   createUserSuccess: ['userData'],
   createUserError: ['errorMessage'],
+  resetError: null,
   signInUserRequest: ['email', 'password'],
   signInUserSuccess: ['userData'],
   signInUserError: ['errorMessage'],
@@ -32,6 +33,8 @@ export const createUserError = (state, { errorMessage }) => state.merge({
   loading: false
 })
 
+export const resetError = (state) => state.merge({ errorMessage: null })
+
 export const signInUserRequest = (state) => state.merge({ loading: true, errorMessage: null })
 export const signInUserSuccess = (state, { userData }) =>
   state.merge({ userLoggedOut: false, userLoggedIn: true, loading: false, userData })
@@ -47,6 +50,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.CREATE_USER_REQUEST]: createUserRequest,
   [Types.CREATE_USER_SUCCESS]: createUserSuccess,
   [Types.CREATE_USER_ERROR]: createUserError,
+  [Types.RESET_ERROR]: resetError,
   [Types.SIGN_IN_USER_REQUEST]: signInUserRequest,
   [Types.SIGN_IN_USER_SUCCESS]: signInUserSuccess,
   [Types.SIGN_IN_USER_ERROR]: signInUserError,

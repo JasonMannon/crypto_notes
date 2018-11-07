@@ -1,11 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import UserActions from '../reducers/user'
+import PropTypes from 'prop-types';
 import { Platform, Text, View, TextInput, AsyncStorage } from 'react-native';
 import { Input, Button } from 'react-native-elements'
 import GlobalStyles from '../styles/GlobalStyles.style'
+import * as Animatable from 'react-native-animatable';
 
 class SignUp extends React.Component {
+  static propTypes = {
+    email: PropTypes.string,
+    username: PropTypes.string,
+    password: PropTypes.string,
+    passwordConfirmation: PropTypes.string,
+    resetError: PropTypes.func,
+    createUserRequest: PropTypes.func,
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func.isRequired
+    }).isRequired
+  }
+
   constructor(props) {
     super(props)
 
@@ -15,6 +29,10 @@ class SignUp extends React.Component {
       password: '',
       passwordConfirmation: ''
     }
+  }
+
+  componentWillUnmount() {
+    this.props.resetError()
   }
 
   handleChangeText = (key, value) => {
@@ -46,7 +64,7 @@ class SignUp extends React.Component {
     }
 
     return (
-      <View style={GlobalStyles.defaultView}>
+      <Animatable.View ref={ref => this.viewRef = ref} animation='fadeIn' style={GlobalStyles.defaultView}>
         <View style={{alignItems: 'center'}}>
           <Text style={Platform.OS === 'ios' ? GlobalStyles.titleFontIOS : GlobalStyles.titleFontAndroid}>Sign Up</Text>
           <Text style={Platform.OS === 'ios' ? GlobalStyles.errorFontIOS : GlobalStyles.errorFontAndroid}>{errorMessage}</Text>
@@ -91,7 +109,7 @@ class SignUp extends React.Component {
         <View style={{alignItems: 'center'}}>
           <Text style={Platform.OS === 'ios' ? GlobalStyles.bodyFontIOS : GlobalStyles.bodyFontAndroid} onPress={() => this.props.navigation.navigate('SignIn')}>Already have an account? Sign In!</Text>
         </View>
-      </View>
+      </Animatable.View>
     )
   }
 }
@@ -107,7 +125,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  createUserRequest: (email, username, password, passwordConfirmation) => dispatch(UserActions.createUserRequest(email, username, password, passwordConfirmation))
+  createUserRequest: (email, username, password, passwordConfirmation) => dispatch(UserActions.createUserRequest(email, username, password, passwordConfirmation)),
+  resetError: () => dispatch(UserActions.resetError())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SignUp);
