@@ -1,9 +1,9 @@
 import { iOSUIKit, material } from 'react-native-typography'
 
 export default {
-  defaultView: {
+  View: {
     flex: 1,
-    justifyContent: 'center',
+    marginTop: '20%',
     backgroundColor: '#EEE5E9'
   },
   defaultButton: {
@@ -45,12 +45,12 @@ export default {
     ],
   subtitleFontAndroid:
     [
-      material.title,
+      material.display1,
       {color: '#383D3B'}
     ],
   subtitleFontIOS:
     [
-      iOSUIKit.subheadEmphasized,
+      iOSUIKit.title3Emphasized,
       {color: '#383D3B'}
     ],
   errorFontAndroid:

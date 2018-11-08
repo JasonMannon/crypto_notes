@@ -31,7 +31,7 @@ const Tabs = createMaterialTopTabNavigator({
 
 const DrawerNavigator = createDrawerNavigator({
     Main:{
-        screen: Tabs
+        screen: Main
     }
 },{
     initialRouteName: 'Main',
@@ -51,7 +51,7 @@ const AuthenticatedTabs = createStackNavigator({
           <Icon name="bars" size={35} navigation={navigation} />
         </TouchableOpacity>,
         headerStyle: {
-            backgroundColor: '#333',
+            backgroundColor: '#FF4264',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {

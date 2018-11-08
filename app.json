@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "react-native-boilerplate",
+    "name": "notes-native",
     "description": "This project is really great.",
-    "slug": "react-native-boilerplate",
+    "slug": "notes-native",
     "privacy": "public",
     "sdkVersion": "30.0.0",
     "platforms": ["ios", "android"],

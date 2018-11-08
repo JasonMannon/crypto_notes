@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Text, View } from 'react-native';
+import { Platform, Text, View } from 'react-native';
+import GlobalStyles from '../styles/GlobalStyles.style'
+import MainStyles from '../styles/screens/Main.style'
+import * as Animatable from 'react-native-animatable';
 
 class Main extends React.Component {
   constructor(props) {
@@ -12,11 +15,11 @@ class Main extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, justifyContent: 'center'}}>
+      <Animatable.View ref={ref => this.viewRef = ref} animation='fadeIn' style={MainStyles.View}>
         <View style={{alignItems: 'center'}}>
-          <Text>Boilerplate Main View</Text>
+          <Text style={Platform.OS === 'ios' ? GlobalStyles.subtitleFontIOS : GlobalStyles.subtitleFontAndroid}>You haven't created any notes yet.</Text>
         </View>
-      </View>
+      </Animatable.View>
     )
   }
 }
