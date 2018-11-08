@@ -60,7 +60,7 @@ class DrawerScreen extends Component {
               justifyContent: 'space-between'
             }}>
               <Text onPress={() => this._signOutAsync()}>
-              Sign Out
+                Sign Out
               </Text>
             </View>
           </View>

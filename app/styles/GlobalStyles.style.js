@@ -50,7 +50,7 @@ export default {
     ],
   subtitleFontIOS:
     [
-      iOSUIKit.subheadEmphasized,
+      iOSUIKit.bodyEmphasized,
       {color: '#383D3B'}
     ],
   errorFontAndroid:

@@ -47,8 +47,8 @@ const AuthenticatedTabs = createStackNavigator({
     navigationOptions: ({ navigation }) => ({
         title: 'React Boilerplate',  // Title to appear in status bar
         headerLeft:
-        <TouchableOpacity  onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
-          <Icon name="bars" size={35} navigation={navigation} />
+        <TouchableOpacity  style={{marginLeft: 5}} onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+          <Icon name="bars" color='white' size={35} navigation={navigation} />
         </TouchableOpacity>,
         headerStyle: {
             backgroundColor: '#FF4264',
