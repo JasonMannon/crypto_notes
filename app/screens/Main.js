@@ -10,9 +10,10 @@ import * as Animatable from 'react-native-animatable'
 class Main extends React.Component {
   constructor(props) {
     super(props)
+  }
 
-    this.state ={
-    }
+  handleOnPress = () => {
+    this.props.navigation.navigate('NoteModal')
   }
 
   render() {
@@ -28,6 +29,7 @@ class Main extends React.Component {
                 color='white'
               />
             }
+            onPress={() => this.handleOnPress()}
             buttonStyle={MainStyles.circleButton}
             title=''
             containerStyle={{ marginTop: 20, marginBottom: 10 }}

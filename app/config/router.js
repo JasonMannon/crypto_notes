@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, Image, Button, TouchableOpacity } from 'react-native'
+import { View, Text, Image, Button, TouchableHighlight, TouchableOpacity } from 'react-native'
 import { NavigationActions, createMaterialTopTabNavigator, DrawerActions, createDrawerNavigator, createSwitchNavigator, createStackNavigator } from 'react-navigation';
 import SignIn from '../screens/SignIn'
 import SignUp from '../screens/SignUp'
@@ -7,6 +7,8 @@ import Main from '../screens/Main'
 import AuthLoading from '../screens/AuthLoading'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DrawerScreen from '../screens/DrawerScreen'
+import NewNote from '../screens/NewNote'
+import NoteModal from '../components/NoteModal'
 
 const UnAuthenticatedTabs = createSwitchNavigator({
   SignIn: { screen: SignIn },
@@ -30,26 +32,37 @@ const Tabs = createMaterialTopTabNavigator({
 });
 
 const DrawerNavigator = createDrawerNavigator({
-    Main:{
-        screen: Main
-    }
-},{
+    Main: {
+      screen: Main
+    },
+    NewNote: {
+      screen: NewNote
+    },
+},
+{
     initialRouteName: 'Main',
     contentComponent: DrawerScreen,
     drawerWidth: 300
 });
 
+const StackNavigator = createStackNavigator({
+  NoteModal: {
+    screen: NoteModal,
+  },
+},
+{headerMode: 'none'}
+
+)
+
 const AuthenticatedTabs = createStackNavigator({
-    DrawerNavigator:{
-        screen: DrawerNavigator
-    }
-  },{
-    navigationOptions: ({ navigation }) => ({
-        title: 'React Boilerplate',  // Title to appear in status bar
+    DrawerNavigator: {
+      screen: DrawerNavigator,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Your Notes',  // Title to appear in status bar
         headerLeft:
-        <TouchableOpacity  style={{marginLeft: 5}} onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
-          <Icon name="bars" color='white' size={35} navigation={navigation} />
-        </TouchableOpacity>,
+          <TouchableOpacity  style={{marginLeft: 5}} onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+            <Icon name="bars" color='white' size={35} navigation={navigation} />
+          </TouchableOpacity>,
         headerStyle: {
             backgroundColor: '#FF4264',
         },
@@ -57,7 +70,28 @@ const AuthenticatedTabs = createStackNavigator({
         headerTitleStyle: {
           fontWeight: 'bold',
         },
-    })
+      })
+    },
+    StackNavigator: {
+      screen: StackNavigator,
+      navigationOptions: ({ navigation }) => ({
+        title: 'Add Note',
+        headerStyle: {
+          backgroundColor: '#FF4264',
+        },
+        headerRight:
+          <TouchableOpacity style={{marginRight: 15}} onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+            <Icon name="plus" size={18} color='white' navigation={navigation} />
+          </TouchableOpacity>,
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }),
+    }
+  },
+  {
+
 });
 
 export const Navigator = createSwitchNavigator(
@@ -68,5 +102,6 @@ export const Navigator = createSwitchNavigator(
   },
   {
     initialRouteName: 'AuthLoading',
+    headerMode: 'screen'
   }
 );
