@@ -41,6 +41,7 @@ const create = (dispatch) => {
         const userData = JSON.parse(value)
 
         if (userData && userData.uid) {
+          console.log(userData)
           setAuthHeaders(userData)
         }
       }
@@ -50,13 +51,14 @@ const create = (dispatch) => {
   }
 
   const signInUser = (email, password) => api.post('/auth/sign_in', { email, password })
-
   const createUser = (email, username, password, passwordConfirmation) =>
     api.post('/auth', { email, username, password, password_confirmation: passwordConfirmation })
-
   const signOutUser = () => api.delete('/auth/sign_out')
 
+  const createNote = (note) => api.post('/notes', { note })
+
   return {
+    createNote,
     createUser,
     signInUser,
     signOutUser

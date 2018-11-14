@@ -24,6 +24,7 @@ export function* signInUserRequest (api, { email, password }) {
   if (response.ok) {
     const { data: { data: user } } = response
     const { headers: { 'access-token': accessToken, client } } = response
+    console.log(response)
     const userData = { username: user.username, uid: user.uid, email: user.email, accessToken: accessToken, client: client }
 
     yield put (Actions.signInUserSuccess(userData))

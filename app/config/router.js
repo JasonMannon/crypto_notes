@@ -80,7 +80,7 @@ const AuthenticatedTabs = createStackNavigator({
           backgroundColor: '#FF4264',
         },
         headerRight:
-          <TouchableOpacity style={{marginRight: 15}} onPress={() => {navigation.dispatch(DrawerActions.toggleDrawer())} }>
+          <TouchableOpacity style={{marginRight: 15}} onPress={() => {navigation.state.routes[0].params.addNote()} }>
             <Icon name="plus" size={18} color='white' navigation={navigation} />
           </TouchableOpacity>,
         headerTintColor: '#fff',

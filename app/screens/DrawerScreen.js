@@ -15,6 +15,7 @@ class DrawerScreen extends Component {
   }
 
   _signOutAsync = async () => {
+    console.log('here')
     await AsyncStorage.clear();
     this.props.signOutUser()
   };

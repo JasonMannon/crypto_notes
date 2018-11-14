@@ -66,56 +66,54 @@ class SignUp extends React.Component {
     }
 
     return (
-      <KeyboardAwareScrollView>
-        <Animatable.View ref={ref => this.viewRef = ref} animation='fadeIn' style={GlobalStyles.defaultView}>
-          <View style={{alignItems: 'center'}}>
-            <Text style={Platform.OS === 'ios' ? GlobalStyles.titleFontIOS : GlobalStyles.titleFontAndroid}>Sign Up</Text>
-            <Text style={Platform.OS === 'ios' ? GlobalStyles.errorFontIOS : GlobalStyles.errorFontAndroid}>{errorMessage}</Text>
-          </View>
-          <View style={{alignItems: 'center'}}>
-            <Input
-              inputContainerStyle={GlobalStyles.defaultInput}
-              placeholder='Email'
-              onChangeText={(email) => this.handleChangeText('email', email)}
-              value={email}
-            />
-            <Input
-              inputContainerStyle={GlobalStyles.defaultInput}
-              placeholder='Username'
-              onChangeText={(username) => this.handleChangeText('username', username)}
-              value={username}
-            />
-            <Input
-              inputContainerStyle={GlobalStyles.defaultInput}
-              textContentType='password'
-              secureTextEntry={true}
-              placeholder='Password'
-              value={password}
-              onChangeText={(password) => this.handleChangeText('password', password)}
-            />
-            <Input
-              inputContainerStyle={GlobalStyles.defaultInput}
-              textContentType='password'
-              secureTextEntry={true}
-              placeholder='Password Confirmation'
-              value={passwordConfirmation}
-              onChangeText={(passwordConfirmation) => this.handleChangeText('passwordConfirmation', passwordConfirmation)}
-            />
-          </View>
-          <View style={{marginBottom: 5}}>
-            <Button
-              onPress={() => this.handleOnSubmit()}
-              buttonStyle={GlobalStyles.defaultButton}
-              loading={loading}
-              disabled={loading}
-              title="Sign Up"
-            />
-          </View>
-          <View style={{alignItems: 'center'}}>
-            <Text style={Platform.OS === 'ios' ? GlobalStyles.bodyFontIOS : GlobalStyles.bodyFontAndroid} onPress={() => this.props.navigation.navigate('SignIn')}>Already have an account? Sign In!</Text>
-          </View>
-        </Animatable.View>
-      </KeyboardAwareScrollView>
+      <Animatable.View ref={ref => this.viewRef = ref} animation='fadeIn' style={GlobalStyles.defaultView}>
+        <View style={{alignItems: 'center'}}>
+          <Text style={Platform.OS === 'ios' ? GlobalStyles.titleFontIOS : GlobalStyles.titleFontAndroid}>Sign Up</Text>
+          <Text style={Platform.OS === 'ios' ? GlobalStyles.errorFontIOS : GlobalStyles.errorFontAndroid}>{errorMessage}</Text>
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
+            placeholder='Email'
+            onChangeText={(email) => this.handleChangeText('email', email)}
+            value={email}
+          />
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
+            placeholder='Username'
+            onChangeText={(username) => this.handleChangeText('username', username)}
+            value={username}
+          />
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
+            textContentType='password'
+            secureTextEntry={true}
+            placeholder='Password'
+            value={password}
+            onChangeText={(password) => this.handleChangeText('password', password)}
+          />
+          <Input
+            inputContainerStyle={GlobalStyles.defaultInput}
+            textContentType='password'
+            secureTextEntry={true}
+            placeholder='Password Confirmation'
+            value={passwordConfirmation}
+            onChangeText={(passwordConfirmation) => this.handleChangeText('passwordConfirmation', passwordConfirmation)}
+          />
+        </View>
+        <View style={{marginBottom: 5}}>
+          <Button
+            onPress={() => this.handleOnSubmit()}
+            buttonStyle={GlobalStyles.defaultButton}
+            loading={loading}
+            disabled={loading}
+            title="Sign Up"
+          />
+        </View>
+        <View style={{alignItems: 'center'}}>
+          <Text style={Platform.OS === 'ios' ? GlobalStyles.bodyFontIOS : GlobalStyles.bodyFontAndroid} onPress={() => this.props.navigation.navigate('SignIn')}>Already have an account? Sign In!</Text>
+        </View>
+      </Animatable.View>
     )
   }
 }

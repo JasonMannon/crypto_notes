@@ -47,6 +47,7 @@ class SignIn extends React.Component {
 
   _signInAsync = async () => {
     const { userData } = this.props
+    console.log(userData, '1')
 
     await AsyncStorage.setItem('user', JSON.stringify(userData))
 
